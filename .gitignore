@@ -1,7 +1,0 @@
-# Arquivos temporários do Microsoft Office
-~$*
-
-# Em BASE_DADOS/data, versionar apenas o painel macro limpo.
-/BASE_DADOS/data/*
-!/BASE_DADOS/data/dataset_macro_painel_limpo.csv
-!/BASE_DADOS/data/dataset_macro_painel_limpo.parquet
