@@ -6,12 +6,12 @@ Como juros, inflação, desemprego e atividade econômica se relacionam com a in
 
 ## Dados disponíveis
 
-Os dois arquivos cobrem 161 meses e têm 102 colunas. Cada observação combina o mês de referência (`mes_ano`) com um segmento de crédito (`porte`). A variável-alvo `default_percent` é calculada na consolidação como o percentual de ativos problemáticos sobre a carteira ativa.
+Os dois arquivos cobrem 161 meses. Cada observação combina o mês de referência (`mes_ano`) com um segmento de crédito (`porte`). A variável-alvo `default_percent` é calculada na consolidação como o percentual de ativos problemáticos sobre a carteira ativa.
 
 | Arquivo | Observações | Recorte |
 | --- | ---: | --- |
 | [Painel em CSV](BASE_DADOS/data/dataset_macro_painel_limpo.csv) | 2.175 | 14 segmentos de pessoas físicas e jurídicas, incluindo categorias com classificação indisponível. |
-| [Painel em Parquet](BASE_DADOS/data/dataset_macro_painel_limpo.parquet) | 1.288 | Oito segmentos de pessoas físicas com classificação disponível. Cada segmento tem uma observação por mês. É a base usada no notebook econométrico. |
+| [Painel em Parquet](BASE_DADOS/data/dataset_macro_painel_limpo_com_dummies.parquet) | 1.288 | Oito segmentos de pessoas físicas com classificação disponível. Cada segmento tem uma observação por mês. É a base usada no notebook econométrico. |
 
 Entre os indicadores do painel estão Selic, IPCA, desemprego, IBC-Br e câmbio. O notebook de consolidação consulta séries do Sistema Gerenciador de Séries Temporais do Banco Central do Brasil. [Documentação do SGS](https://www.bcb.gov.br/gestao_site/webservices.asp?frame=1)
 
@@ -33,7 +33,7 @@ Na raiz do repositório, instale `pandas` e `pyarrow` com `python -m pip install
 ```python
 import pandas as pd
 
-painel = pd.read_parquet("BASE_DADOS/data/dataset_macro_painel_limpo.parquet")
+painel = pd.read_parquet("BASE_DADOS/data/dataset_macro_painel_limpo_com_dummies.parquet")
 resumo = painel.groupby("porte")["default_percent"].agg(
     observacoes="size",
     media_percentual="mean",
